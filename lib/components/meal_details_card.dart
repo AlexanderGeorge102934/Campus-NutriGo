@@ -57,7 +57,7 @@ class MealDetailsScreen extends StatelessWidget {
             ),
             SizedBox(height: TSizes.sm(context)),
             Text(nutritionInfo, textAlign: TextAlign.center, style: TextStyle(fontSize: TSizes.fontSizeMd(context))),
-            Spacer(),
+            const Spacer(),
             ElevatedButton(
               onPressed: () {
                 // Add to order or proceed with order action

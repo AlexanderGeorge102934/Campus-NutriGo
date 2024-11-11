@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../utils/constants/sizes.dart';
+import '../main_meal_selection_screen/screen.dart'; // Import the target screen
 
 class MealPriceSelection extends StatefulWidget {
   final int initialBudget;
@@ -59,7 +60,18 @@ class MealPriceSelectionState extends State<MealPriceSelection> {
               child: ElevatedButton(
                 onPressed: selectedAmount != null
                     ? () {
-                  // Navigate to other screens if needed
+                  // Navigate to MainMealSelectionScreen and pass the necessary parameters
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MainMealSelectionScreen(
+                        remainingBudget: remainingBudget,
+                        dietaryPreference: "vegetarian", // TODO Example: Pass selected dietary preference
+                        mealType: "lunch", // TODO Example: Pass selected meal type
+                        priceLimit: selectedAmount!,
+                      ),
+                    ),
+                  );
                 }
                     : null, // Enable only if a selection is made
                 child: const Icon(Icons.arrow_forward),
