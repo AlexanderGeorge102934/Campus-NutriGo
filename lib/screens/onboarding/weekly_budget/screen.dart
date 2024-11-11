@@ -9,27 +9,30 @@ class WeeklyBudgetScreen extends StatefulWidget {
 }
 
 class WeeklyBudgetScreenState extends State<WeeklyBudgetScreen> {
-  String budget = "0";
+  final TextEditingController _budgetController = TextEditingController();
+  bool _isButtonEnabled = false;
 
-  void _addDigit(String digit) {
-    setState(() {
-      if (budget == "0") {
-        budget = digit;
-      } else {
-        budget += digit;
-      }
-    });
+  @override
+  void initState() {
+    super.initState();
+    _budgetController.addListener(_updateButtonState);
   }
 
-  void _clearBudget() {
+  @override
+  void dispose() {
+    _budgetController.removeListener(_updateButtonState);
+    _budgetController.dispose();
+    super.dispose();
+  }
+
+  void _updateButtonState() {
     setState(() {
-      budget = "0";
+      _isButtonEnabled = _budgetController.text.isNotEmpty;
     });
   }
 
   void _submitBudget() {
-    // Navigate to the main app or perform other actions
-    Navigator.pushReplacementNamed(context, '/main'); // Replace '/main' with your main screen route
+    Navigator.pushReplacementNamed(context, '/main'); // Replace '/main' with main screen route
   }
 
   @override
@@ -51,13 +54,19 @@ class WeeklyBudgetScreenState extends State<WeeklyBudgetScreen> {
             ),
             SizedBox(height: TSizes.spaceBtwSections(context)),
             Container(
-              padding: EdgeInsets.all(TSizes.md(context)),
+              padding: EdgeInsets.symmetric(horizontal: TSizes.md(context)),
               decoration: BoxDecoration(
                 color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(TSizes.borderRadiusMd(context)),
               ),
-              child: Text(
-                "\$$budget",
+              child: TextField(
+                controller: _budgetController,
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  prefixText: '\$',
+                  hintText: "Enter your budget",
+                ),
                 style: TextStyle(
                   fontSize: TSizes.fontSizeXXl(context),
                   fontWeight: FontWeight.bold,
@@ -65,50 +74,21 @@ class WeeklyBudgetScreenState extends State<WeeklyBudgetScreen> {
               ),
             ),
             SizedBox(height: TSizes.spaceBtwSections(context)),
-            _buildKeypad(context),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildKeypad(BuildContext context) {
-    return Expanded(
-      child: GridView.count(
-        crossAxisCount: 3,
-        mainAxisSpacing: TSizes.spaceBtwItems(context),
-        crossAxisSpacing: TSizes.spaceBtwItems(context),
-        padding: EdgeInsets.symmetric(horizontal: TSizes.lg(context)),
-        children: [
-          ...List.generate(9, (index) {
-            final digit = (index + 1).toString();
-            return _buildKey(digit, () => _addDigit(digit));
-          }),
-          _buildKey("C", _clearBudget, Colors.red), // Clear button
-          _buildKey("0", () => _addDigit("0")),
-          _buildKey("✔", _submitBudget, Colors.green), // Submit button
-        ],
-      ),
-    );
-  }
-
-  Widget _buildKey(String label, VoidCallback onPressed, [Color? color]) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        decoration: BoxDecoration(
-          color: color ?? Colors.white,
-          borderRadius: BorderRadius.circular(TSizes.borderRadiusSm(context)),
-        ),
-        child: Center(
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: TSizes.fontSizeXl(context),
-              fontWeight: FontWeight.bold,
-              color: color == null ? Colors.black : Colors.white,
+            ElevatedButton(
+              onPressed: _isButtonEnabled ? _submitBudget : null,
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith<Color>(
+                      (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.disabled)) {
+                      return Colors.grey; // Disabled color
+                    }
+                    return Colors.green; // Enabled color
+                  },
+                ),
+              ),
+              child: const Text("Continue"),
             ),
-          ),
+          ],
         ),
       ),
     );

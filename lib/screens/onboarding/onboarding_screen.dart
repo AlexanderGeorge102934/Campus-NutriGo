@@ -1,3 +1,4 @@
+import 'package:cs_422_prototype/screens/onboarding/weekly_budget/screen.dart';
 import 'package:flutter/material.dart';
 import 'welcome_screen.dart';
 import 'information_screen.dart';
@@ -34,7 +35,8 @@ class OnboardingScreenState extends State<OnboardingScreen> {
         children: [
           WelcomeScreen(onNext: nextPage),
           InformationScreen(onNext: nextPage),
-          const DietaryPreferenceScreen(), // Final onboarding screen
+          DietaryPreferenceScreen(onNext: nextPage), // Pass nextPage callback
+          const WeeklyBudgetScreen(), // Add WeeklyBudgetScreen as the next screen
         ],
       ),
     );
