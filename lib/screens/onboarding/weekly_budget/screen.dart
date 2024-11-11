@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../utils/constants/sizes.dart';
+import '../../../data/user_data.dart'; // Import user_data
 import '../../public/meal_price_range_selection/screen.dart';
 
 class WeeklyBudgetScreen extends StatefulWidget {
@@ -35,8 +36,9 @@ class WeeklyBudgetScreenState extends State<WeeklyBudgetScreen> {
   void _submitBudget() {
     // Parse the budget input as an integer
     final int budget = int.tryParse(_budgetController.text) ?? 0;
+    UserData.weeklyBudget = budget; // Save the budget globally
 
-    // Navigate to MealPriceSelection and pass the budget
+    // Navigate to MealPriceSelection screen
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -86,16 +88,6 @@ class WeeklyBudgetScreenState extends State<WeeklyBudgetScreen> {
             SizedBox(height: TSizes.spaceBtwSections(context)),
             ElevatedButton(
               onPressed: _isButtonEnabled ? _submitBudget : null,
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.resolveWith<Color>(
-                      (Set<WidgetState> states) {
-                    if (states.contains(WidgetState.disabled)) {
-                      return Colors.grey; // Disabled color
-                    }
-                    return Colors.green; // Enabled color
-                  },
-                ),
-              ),
               child: const Text("Continue"),
             ),
           ],

@@ -3,7 +3,7 @@ const List<Map<String, dynamic>> foodData = [
   {
     "name": "Greek Yogurt with Berries",
     "price": 8,
-    "imageUrl": "https://example.com/greek_yogurt_berries.jpg",
+    "imageUrl": "lib/data/images/greek_yogurt.jpg",
     "mealType": "breakfast",
     "diet": "high protein",
     "ingredients": "Greek yogurt, blueberries, strawberries, honey, chia seeds",
@@ -12,7 +12,7 @@ const List<Map<String, dynamic>> foodData = [
   {
     "name": "Egg White Omelette",
     "price": 9,
-    "imageUrl": "https://example.com/egg_white_omelette.jpg",
+    "imageUrl": "lib/data/images/egg_white_omelette.jpg",
     "mealType": "breakfast",
     "diet": "high protein",
     "ingredients": "Egg whites, spinach, bell peppers, mushrooms, low-fat cheese",
@@ -21,7 +21,7 @@ const List<Map<String, dynamic>> foodData = [
   {
     "name": "Protein Pancakes",
     "price": 10,
-    "imageUrl": "https://example.com/protein_pancakes.jpg",
+    "imageUrl": "lib/data/images/protein_pancakes.jpg",
     "mealType": "breakfast",
     "diet": "high protein",
     "ingredients": "Protein powder, oats, bananas, egg whites, almond milk",
@@ -30,7 +30,7 @@ const List<Map<String, dynamic>> foodData = [
   {
     "name": "Smoked Salmon Bagel",
     "price": 12,
-    "imageUrl": "https://example.com/salmon_bagel.jpg",
+    "imageUrl": "lib/data/images/smoked_salmon_bagel.jpg",
     "mealType": "breakfast",
     "diet": "high protein",
     "ingredients": "Whole wheat bagel, smoked salmon, cream cheese, capers",
@@ -39,7 +39,7 @@ const List<Map<String, dynamic>> foodData = [
   {
     "name": "Cottage Cheese with Pineapple",
     "price": 7,
-    "imageUrl": "https://example.com/cottage_cheese_pineapple.jpg",
+    "imageUrl": "lib/data/images/pineapple_cottage_cheese.jpg",
     "mealType": "breakfast",
     "diet": "high protein",
     "ingredients": "Cottage cheese, pineapple chunks, flaxseeds, honey",
@@ -48,7 +48,7 @@ const List<Map<String, dynamic>> foodData = [
   {
     "name": "Protein Smoothie Bowl",
     "price": 11,
-    "imageUrl": "https://example.com/protein_smoothie_bowl.jpg",
+    "imageUrl": "lib/data/images/protein_smoothie_bowl.jpg",
     "mealType": "breakfast",
     "diet": "high protein",
     "ingredients": "Protein powder, mixed berries, spinach, almond milk, granola",
@@ -57,7 +57,7 @@ const List<Map<String, dynamic>> foodData = [
   {
     "name": "Turkey Bacon and Avocado Toast",
     "price": 10,
-    "imageUrl": "https://example.com/turkey_bacon_avocado_toast.jpg",
+    "imageUrl": "lib/data/images/turkey_bacon_avacado_toast.jpg",
     "mealType": "breakfast",
     "diet": "high protein",
     "ingredients": "Whole grain toast, turkey bacon, avocado, poached egg",
@@ -68,7 +68,7 @@ const List<Map<String, dynamic>> foodData = [
   {
     "name": "Grilled Chicken Salad",
     "price": 12,
-    "imageUrl": "https://example.com/grilled_chicken_salad.jpg",
+    "imageUrl": "lib/data/images/grilled_chicken_salad.jpg",
     "mealType": "lunch",
     "diet": "high protein",
     "ingredients": "Grilled chicken breast, mixed greens, cherry tomatoes, cucumbers, olive oil",
@@ -77,7 +77,7 @@ const List<Map<String, dynamic>> foodData = [
   {
     "name": "Turkey Wrap",
     "price": 11,
-    "imageUrl": "https://example.com/turkey_wrap.jpg",
+    "imageUrl": "lib/data/images/grilled_chicken_salad.jpg",
     "mealType": "lunch",
     "diet": "high protein",
     "ingredients": "Whole wheat wrap, turkey breast, lettuce, avocado, mustard",
@@ -86,7 +86,7 @@ const List<Map<String, dynamic>> foodData = [
   {
     "name": "Quinoa and Black Bean Bowl",
     "price": 10,
-    "imageUrl": "https://example.com/quinoa_black_bean.jpg",
+    "imageUrl": "lib/data/images/quinoa_black_bean_bowl.jpg",
     "mealType": "lunch",
     "diet": "high protein",
     "ingredients": "Quinoa, black beans, corn, avocado, lime dressing",
@@ -95,7 +95,7 @@ const List<Map<String, dynamic>> foodData = [
   {
     "name": "Beef and Broccoli Stir-Fry",
     "price": 14,
-    "imageUrl": "https://example.com/beef_broccoli_stirfry.jpg",
+    "imageUrl": "lib/data/images/beef_broccoli_stir_fry.jpg",
     "mealType": "lunch",
     "diet": "high protein",
     "ingredients": "Beef strips, broccoli, soy sauce, garlic, ginger, brown rice",
@@ -104,7 +104,7 @@ const List<Map<String, dynamic>> foodData = [
   {
     "name": "Tuna Salad Sandwich",
     "price": 9,
-    "imageUrl": "https://example.com/tuna_salad_sandwich.jpg",
+    "imageUrl": "lib/data/images/tuna_salad_sandwhich.jpg",
     "mealType": "lunch",
     "diet": "high protein",
     "ingredients": "Whole grain bread, tuna, celery, mayonnaise, lettuce",
@@ -113,7 +113,7 @@ const List<Map<String, dynamic>> foodData = [
   {
     "name": "Chickpea and Lentil Stew",
     "price": 10,
-    "imageUrl": "https://example.com/chickpea_lentil_stew.jpg",
+    "imageUrl": "lib/data/images/chickpea_lentil_stew.jpg",
     "mealType": "lunch",
     "diet": "high protein",
     "ingredients": "Chickpeas, lentils, tomatoes, carrots, spinach, spices",

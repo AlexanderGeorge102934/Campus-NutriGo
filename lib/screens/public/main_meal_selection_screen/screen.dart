@@ -7,7 +7,7 @@ import '../../../data/food_data.dart';
 class MainMealSelectionScreen extends StatelessWidget {
   final int remainingBudget;
   final String dietaryPreference;
-  final String mealType;
+  final String mealType; // Dynamic meal type based on time of day
   final int priceLimit;
 
   const MainMealSelectionScreen({
@@ -39,7 +39,8 @@ class MainMealSelectionScreen extends StatelessWidget {
           icon: Icon(Icons.arrow_back, color: Colors.black, size: TSizes.iconMd(context)),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Text("Lunch", style: TextStyle(color: Colors.black, fontSize: TSizes.fontSizeLg(context))),
+        title: Text(mealType, // Display mealType as title
+            style: TextStyle(color: Colors.black, fontSize: TSizes.fontSizeLg(context))),
         actions: [
           Icon(Icons.person, color: Colors.black, size: TSizes.iconMd(context)),
         ],

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../../utils/constants/sizes.dart';
+import '../../../data/user_data.dart'; // Import user_data
 
 class DietaryPreferenceScreen extends StatefulWidget {
-  final VoidCallback onNext; // Add onNext callback
+  final VoidCallback onNext;
 
   const DietaryPreferenceScreen({required this.onNext, super.key});
 
@@ -32,15 +33,20 @@ class DietaryPreferenceScreenState extends State<DietaryPreferenceScreen> {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: TSizes.spaceBtwSections(context)),
-              _buildPreferenceChip("High-Protein", Icons.fitness_center),
-              _buildPreferenceChip("Vegetarian", Icons.restaurant),
-              _buildPreferenceChip("Vegan", Icons.spa),
-              _buildPreferenceChip("General", Icons.restaurant_menu),
+              _buildPreferenceChip("high protein", Icons.fitness_center),
+              _buildPreferenceChip("vegetarian", Icons.restaurant),
+              _buildPreferenceChip("vegan", Icons.spa),
+              _buildPreferenceChip("general", Icons.restaurant_menu),
               const SizedBox(height: 20),
               Align(
                 alignment: Alignment.bottomRight,
                 child: ElevatedButton(
-                  onPressed: selectedPreference != null ? widget.onNext : null,
+                  onPressed: selectedPreference != null
+                      ? () {
+                    UserData.dietaryPreference = selectedPreference; // Save to global data
+                    widget.onNext();
+                  }
+                      : null,
                   child: const Icon(Icons.arrow_forward),
                 ),
               ),

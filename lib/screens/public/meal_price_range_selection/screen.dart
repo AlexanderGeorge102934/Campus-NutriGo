@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../data/user_data.dart';
 import '../../../utils/constants/sizes.dart';
-import '../main_meal_selection_screen/screen.dart'; // Import the target screen
+import '../main_meal_selection_screen/screen.dart';
 
 class MealPriceSelection extends StatefulWidget {
   final int initialBudget;
@@ -13,7 +14,7 @@ class MealPriceSelection extends StatefulWidget {
 
 class MealPriceSelectionState extends State<MealPriceSelection> {
   late int remainingBudget;
-  int? selectedAmount; // Stores the selected price range amount
+  int? selectedAmount;
 
   @override
   void initState() {
@@ -21,9 +22,23 @@ class MealPriceSelectionState extends State<MealPriceSelection> {
     remainingBudget = widget.initialBudget;
   }
 
+  // Function to determine the meal type based on the current time
+  String getCurrentMealType() {
+    final hour = DateTime.now().hour;
+    if (hour >= 6 && hour < 11) {
+      return "breakfast";
+    } else if (hour >= 11 && hour < 16) {
+      return "lunch";
+    } else if (hour >= 16 && hour < 22) {
+      return "dinner";
+    } else {
+      return "dinner"; // Default to dinner for late-night selections
+    }
+  }
+
   void _selectAmount(int amount) {
     setState(() {
-      selectedAmount = amount; // Update the selected amount
+      selectedAmount = amount;
     });
   }
 
@@ -54,26 +69,29 @@ class MealPriceSelectionState extends State<MealPriceSelection> {
             _buildPriceButton(context, 10, "\$\$"),
             _buildPriceButton(context, 15, "\$\$\$"),
             _buildPriceButton(context, 20, "\$\$\$\$"),
-            SizedBox(height: TSizes.spaceBtwSections(context)), // Space before the bottom button
+            SizedBox(height: TSizes.spaceBtwSections(context)),
             Align(
               alignment: Alignment.bottomRight,
               child: ElevatedButton(
                 onPressed: selectedAmount != null
                     ? () {
+                  // Determine the meal type based on the current time
+                  final mealType = getCurrentMealType();
+
                   // Navigate to MainMealSelectionScreen and pass the necessary parameters
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => MainMealSelectionScreen(
                         remainingBudget: remainingBudget,
-                        dietaryPreference: "vegetarian", // TODO Example: Pass selected dietary preference
-                        mealType: "lunch", // TODO Example: Pass selected meal type
+                        dietaryPreference: UserData.dietaryPreference!,
+                        mealType: mealType,
                         priceLimit: selectedAmount!,
                       ),
                     ),
                   );
                 }
-                    : null, // Enable only if a selection is made
+                    : null,
                 child: const Icon(Icons.arrow_forward),
               ),
             ),
@@ -84,12 +102,12 @@ class MealPriceSelectionState extends State<MealPriceSelection> {
   }
 
   Widget _buildPriceButton(BuildContext context, int amount, String symbol) {
-    final isSelected = selectedAmount == amount; // Check if this button is selected
+    final isSelected = selectedAmount == amount;
     return Padding(
       padding: EdgeInsets.symmetric(vertical: TSizes.spaceBtwItems(context)),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: isSelected ? Colors.blue : Colors.grey[300], // Highlight if selected
+          backgroundColor: isSelected ? Colors.blue : Colors.grey[300],
           padding: EdgeInsets.symmetric(horizontal: TSizes.md(context)),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(TSizes.borderRadiusMd(context)),
@@ -104,7 +122,7 @@ class MealPriceSelectionState extends State<MealPriceSelection> {
               style: TextStyle(
                 fontSize: TSizes.fontSizeLg(context),
                 fontWeight: FontWeight.bold,
-                color: isSelected ? Colors.white : Colors.black, // Change text color if selected
+                color: isSelected ? Colors.white : Colors.black,
               ),
             ),
             Text(
@@ -112,7 +130,7 @@ class MealPriceSelectionState extends State<MealPriceSelection> {
               style: TextStyle(
                 fontSize: TSizes.fontSizeLg(context),
                 fontWeight: FontWeight.bold,
-                color: isSelected ? Colors.white : Colors.black, // Change text color if selected
+                color: isSelected ? Colors.white : Colors.black,
               ),
             ),
           ],
