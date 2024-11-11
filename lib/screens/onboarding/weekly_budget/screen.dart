@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../utils/constants/sizes.dart';
+import '../../public/meal_price_range_selection/screen.dart';
 
 class WeeklyBudgetScreen extends StatefulWidget {
   const WeeklyBudgetScreen({super.key});
@@ -32,7 +33,16 @@ class WeeklyBudgetScreenState extends State<WeeklyBudgetScreen> {
   }
 
   void _submitBudget() {
-    Navigator.pushReplacementNamed(context, '/main'); // Replace '/main' with main screen route
+    // Parse the budget input as an integer
+    final int budget = int.tryParse(_budgetController.text) ?? 0;
+
+    // Navigate to MealPriceSelection and pass the budget
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MealPriceSelection(initialBudget: budget),
+      ),
+    );
   }
 
   @override
@@ -62,7 +72,7 @@ class WeeklyBudgetScreenState extends State<WeeklyBudgetScreen> {
               child: TextField(
                 controller: _budgetController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: InputBorder.none,
                   prefixText: '\$',
                   hintText: "Enter your budget",
@@ -77,9 +87,9 @@ class WeeklyBudgetScreenState extends State<WeeklyBudgetScreen> {
             ElevatedButton(
               onPressed: _isButtonEnabled ? _submitBudget : null,
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
-                    if (states.contains(MaterialState.disabled)) {
+                backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                      (Set<WidgetState> states) {
+                    if (states.contains(WidgetState.disabled)) {
                       return Colors.grey; // Disabled color
                     }
                     return Colors.green; // Enabled color
